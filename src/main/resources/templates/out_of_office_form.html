@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="ISO-8859-1">
+<title>Out of Office</title>
+
+<link rel="stylesheet"
+ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+ crossorigin="anonymous">
+ 
+</head>
+<body>
+
+ <!-- create navigation bar ( header) -->
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+   <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed"
+     data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+     aria-controls="navbar">
+     <span class="sr-only">Toggle navigation</span> <span
+      class="icon-bar"></span> <span class="icon-bar"></span> <span
+      class="icon-bar"></span>
+    </button>
+ 
+   </div>
+  </div>
+ </nav>
+ 
+ <br>
+ <br>
+	<div class="container text-center" style="width: 700px;  margin: 0 auto;">
+		   <!-- success message -->		   
+    <div th:if="${param.success}">
+     <div class="alert alert-info">Request sent successfully
+     </div>
+	</div>   
+		<div>
+			<h1>Out of Office</h1>
+		</div>
+		<form th:action="@{'/oof/submit/'+${employee.empid}}"  th:object="${oof}"
+            method="post"  style="max-width: 500px; margin: 40px auto;  ">
+
+			 
+			<div class="form-group row ">
+				 <label  class="col-sm-2 col-form-label"  style="width: 150px;  ">Name</label>				 
+				<div class="col-sm-10" style ="max-width: 350px">
+				<input type="text" th:value="${name}" class="form-control"   disabled  />
+				</div>
+			</div>
+
+ 
+
+			<div class="form-group row">
+				<label  class="col-sm-2 col-form-label"  style="width: 150px;  ">E-mail</label>
+				<div class="col-sm-10" style ="max-width: 350px"> <input  type="email"  th:value="${employee.email}"
+					  class="form-control" disabled />
+					</div>
+			</div>
+
+		 
+			<div class="form-group row">			
+				<label  class="col-sm-2 col-form-label"  style="width: 150px;  ">Start Date</label>
+					<div class="col-sm-10" style ="max-width: 350px">
+				 <input  type="date"	th:field="*{startdate}" class="form-control" required />
+					</div>
+			</div>
+			<div class="form-group row">			
+				<label  class="col-sm-2 col-form-label"  style="width: 150px;  ">End Date</label>
+					<div class="col-sm-10" style ="max-width: 350px">
+				 <input  type="date" th:field="*{enddate}" class="form-control" required />
+					</div>
+			</div>
+			
+
+ 
+
+			<div class="form-group row">
+				<label  class="col-sm-2 col-form-label"  style="width: 150px;  ">Category</label> 
+					<div class="col-sm-10" style ="max-width: 350px">
+				<select	th:field="*{category}" id="designation" class="form-control"  required="required">
+					
+					<option th:each="c : ${categorylist}" th:value="${c}" th:text="${c}"></option>
+					
+					<!-- 
+					<option value=""></option>
+					<option value="Sick">Sick</option>
+					<option value="Vacation">Vacation</option>
+				 -->
+				</select>
+				
+				</div>
+			</div>
+			
+			<div class="form-group row">
+    				<label for="validationTextarea"  class="col-sm-2 col-form-label"  style="width: 150px;  ">Reason</label>
+    				<div class="col-sm-10" style ="max-width: 350px">
+   			 		<textarea class="form-control"  th:field="*{reason}" id="validationTextarea" placeholder="Reason" required></textarea>
+				</div>
+			</div>
+			
+			<div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            
+              
+		</form>
+	 
+	</div>
+</body>
+</html>

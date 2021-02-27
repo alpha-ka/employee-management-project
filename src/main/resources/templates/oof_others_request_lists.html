@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="ISO-8859-1">
+<title>Out of Office - Requests Lists</title>
+
+<link rel="stylesheet"
+ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+ crossorigin="anonymous">
+ 
+</head>
+<body>
+
+ <!-- create navigation bar ( header) -->
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+   <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed"
+     data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+     aria-controls="navbar">
+     <span class="sr-only">Toggle navigation</span> <span
+      class="icon-bar"></span> <span class="icon-bar"></span> <span
+      class="icon-bar"></span>
+    </button>
+    <span class="navbar-brand"  th:text="'Dashboard - '+${name}">Dashboard</span>
+   </div>
+      
+    <ul class="nav navbar-nav">
+     <li><a th:href="@{/}" class="navbar-brand" >Home</a></li>
+    </ul>
+ 
+   <div id="navbar"   class="collapse navbar-collapse navbar-right">
+    <ul class="nav navbar-nav">
+     <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" class="navbar-brand" >Logout</a></li>
+    </ul>
+   </div>
+  </div>
+ </nav>
+ 
+ <br>
+ <br>
+	<div class="container text-center">
+		<div class="form-group">
+			<h1>Out of Office - Requests Lists</h1>
+		</div>
+ 		 
+      <table class="table table-bordered table-striped">
+ 		 <thead>
+ 		 <tr>
+			  <td>Category</td>
+			  <td>Start Date</td>
+			  <td>End Date</td>
+			  <td>No of Days</td>
+			  <td>Reason</td>
+			  <td>Status</td>
+			  <td></td>
+ 		</tr>
+ 		</thead>
+ 		<tbody>
+ 		<tr th:each="oof : ${oofLists}"> 			 
+			  <td th:text="${oof.category}">Category</td>
+			  <!-- <td th:text="${#dates.format(oof.startdate, 'dd-MMM-yyyy')}">Start Date</td> -->
+			  <td th:text="${oof.startdate}">Start Date</td>
+			  <td th:text="${oof.enddate}">End Date</td>
+			  <td th:text="${oof.days}">No of Days</td>
+			  <td th:text="${oof.reason}">Reason</td>
+			  <td th:text="${oof.status}">Status</td>
+			  <td> 
+		<div class="row">	
+		  <div th:style="${oof.status == 'Submitted' ? 'display:block' : 'display:none'}"> 
+       <a th:href="@{'/oof/update/?empid='+${empid}+'&oofid='+${oof.id}+'&flag=Yes'}">
+         <button type="button" class="btn btn-success"  >Approve</button>
+          </a> 
+         <a th:href="@{'/oof/update/?empid='+${empid}+'&oofid='+${oof.id}+'&flag=No'}">
+         <button type="button" class="btn btn-danger"  >Reject</button>
+         </a>
+         </div> 
+    
+        </div>
+        </td>
+      
+ 		</tr>
+ 		
+ 		
+ 		</tbody>
+ 		
+ 		</table>
+ 
+	</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="ISO-8859-1">
+ <link rel="stylesheet"
+ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+ crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/css/bootstrap.min.css" />
+<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+<title>Notification</title>
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0;">
+ 
+ 
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="800"   style="border-collapse: collapse;">
+        <tr>
+            <td align="center" bgcolor="#f6f6f6" style="padding: 40px 0 30px 0;">
+                <img src="logo.png" alt="https://www.alpha.com" style="display: block;" /> 
+               <!--  <img src="logo.png" th:src="@{/logo.png}"  alt="https://www.alpha.com" style="display: block;"/> -->
+            </td>
+        </tr>
+        <tr>
+            <td  style="padding: 40px 0px 40px 0px; border-width: 0;">
+                <p><span th:text="${name}"></span> has applied for <span th:text="${category}"></span>.  Details are as below:</p> 
+					<table> 
+				      <tr>
+				        <td>No.of Days</td>
+				        <td th:text="': '+${days}"></td> 
+				      </tr>
+				      <tr>
+				        <td>Leave Period </td>
+				        <td th:text="': '+${leaveperiod}"></td> 
+				      </tr>
+				      <tr>
+				        <td>Reason </td>
+				        <td th:text="': '+${reason}"></td> 
+				      </tr>
+				      <tr>
+				        <td>Submitted by </td>
+				        <td th:text="': '+${submittedby}"></td> 
+				      </tr>
+				      <tr>
+				        <td>Status</td>
+				        <td th:text="': '+${status}"></td> 
+				      </tr>
+				      
+				     </table>                                             
+            </td>
+        </tr>
+        <tr>
+            <td   bgcolor="#f9f9f9" valign="top" style="padding:0; background-color:#f9f9f9; ">
+                
+                  <p>
+                    Regards, <br /> <span th:text="${signature}"></span>
+                    <br>
+                    <span  th:text="${location}"></span>
+                </p>
+            </td>
+        </tr>
+    </table>
+
+ 
+
+</body>
+</html>
