@@ -1,5 +1,6 @@
 package com.alpha.employeelogin.model;
 
+ 
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,6 +10,8 @@ import javax.persistence.GenerationType;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="out_of_office")
@@ -25,15 +28,17 @@ public class OutofOffice {
 	
 	
 	@Column(name="start_date",nullable = false,columnDefinition = "date")
-	private String startdate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date startdate;
 	
 	@Column(name="end_date",nullable = false,columnDefinition = "date")
-	private String enddate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date enddate;
 	
 	@Column(name="no_of_days",nullable = false)
 	private int days;
 	
-	@Column(nullable = false,columnDefinition = "VARCHAR(1000)")
+	@Column(nullable = false,columnDefinition = "VARCHAR(1500)")
 	private String reason;
 	
 	@Column(  nullable = false)
@@ -43,13 +48,14 @@ public class OutofOffice {
 	private String status;
 	
 	//@Column(name="created_date",nullable = false,insertable=false,updatable = false,columnDefinition = "datetime Default GETDATE()")
-	@Column(name="created_date",nullable = false,insertable=false,updatable = false,columnDefinition = "datetime Default NOW()")
+	@Column(name="created_date",nullable = false,insertable=false,updatable = false,columnDefinition = "timestamp Default NOW()")
 	private Date createddate;
 	
 	@Column(name="created_by",nullable = false,updatable = false)
 	private String createdby;
-		
-	@Column(name="updated_date" ,insertable=false )
+	
+	//@Column(name="updated_date",  insertable=false, columnDefinition="DATETIME")	
+	@Column(name="updated_date",  insertable=false, columnDefinition="timestamp")
 	private Date updateddate;
 	
 	@Column(name="updated_by",insertable=false)
@@ -57,7 +63,7 @@ public class OutofOffice {
 
 	public OutofOffice() {}
 
-	public OutofOffice(long empid, String startdate, String enddate, int days, String reason, String category,
+	public OutofOffice(long empid, Date startdate, Date enddate, int days, String reason, String category,
 			String status, String createdby) {
 		super();
 		this.empid = empid;
@@ -89,19 +95,19 @@ public class OutofOffice {
 		this.empid = empid;
 	}
 
-	public String getStartdate() {
+	public Date getStartdate() {
 		return startdate;
 	}
 
-	public void setStartdate(String startdate) {
+	public void setStartdate(Date startdate) {
 		this.startdate = startdate;
 	}
 
-	public String getEnddate() {
+	public Date getEnddate() {
 		return enddate;
 	}
 
-	public void setEnddate(String enddate) {
+	public void setEnddate(Date enddate) {
 		this.enddate = enddate;
 	}
 

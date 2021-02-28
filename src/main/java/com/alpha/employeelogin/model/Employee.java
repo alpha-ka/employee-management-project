@@ -50,8 +50,8 @@ public class Employee {
 	private String password;
 	
 	@Column(name="date_of_birth", nullable = false,columnDefinition = "date")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private String dob;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date dob;
 	
 	@Column(nullable = false,columnDefinition = "varchar(100)")
 	private String department;
@@ -71,10 +71,11 @@ public class Employee {
 	private Collection<EmployeeRole> role;
 	
 	//@Column(name="created_date", nullable = false, insertable=false,updatable = false, columnDefinition="DATETIME DEFAULT GETDATE() ")
-	@Column(name="created_date", nullable = false, insertable=false,updatable = false, columnDefinition="DATETIME DEFAULT CURRENT_TIMESTAMP  ")
+	@Column(name="created_date", nullable = false, insertable=false,updatable = false, columnDefinition="timestamp DEFAULT NOW()  ")
 	private Date createddate;
 	
-	@Column(name="updated_date",  insertable=false, columnDefinition="DATETIME")	
+	//@Column(name="updated_date",  insertable=false, columnDefinition="DATETIME")	
+	@Column(name="updated_date",  insertable=false, columnDefinition="timestamp")
 	private Date updateddate;
 	
 	@OneToMany(targetEntity = OutofOffice.class,  cascade = CascadeType.ALL)
@@ -98,7 +99,7 @@ public class Employee {
 	public Employee() {}
 	
 	 
-	public Employee(String firstname, String lastname, String email, String password, String dob, String department,
+	public Employee(String firstname, String lastname, String email, String password, Date dob, String department,
 			String designation, String status, Collection<EmployeeRole> role) {
 		super();
 		this.firstname = firstname;
@@ -141,10 +142,10 @@ public class Employee {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getDob() {
+	public Date getDob() {
 		return dob;
 	}
-	public void setDob(String dob) {
+	public void setDob(Date dob) {
 		this.dob = dob;
 	}
 	public String getDepartment() {

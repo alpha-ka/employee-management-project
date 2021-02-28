@@ -1,8 +1,12 @@
 package com.alpha.employeelogin.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -95,18 +99,28 @@ public class EmployeeServiceImpl implements EmployeeService {
 //	     return authorities;
 //	 }
 		@Override
-		public String save(EmployeeDTO employeeDto) {
+		public String save(EmployeeDTO employeeDto) throws ParseException {
 			
 			
 			Employee exitsingemployee = empRepo.findByEmail(employeeDto.getEmail());
 	 	if (exitsingemployee == null) 
 	 	{
+			String dob = employeeDto.getDob();
+				 
+			SimpleDateFormat sdf1=new SimpleDateFormat("yyyy-MM-dd");
+			//SimpleDateFormat sdf2=new SimpleDateFormat("MM/dd/yyyy");
+		 
+			Date dateofbirth = sdf1.parse(dob);
+	 	 
+	 System.out.println(employeeDto.getDob());
+	 System.out.println(dateofbirth);
+		 
 			Employee employee=new Employee(
 					employeeDto.getFirstname(), 
 					employeeDto.getLastname(),
 					employeeDto.getEmail(),
 					passwordEncoder.encode( employeeDto.getPassword()),
-					employeeDto.getDob(), 
+					dateofbirth, 
 					employeeDto.getDepartment(),
 					employeeDto.getDesignation(),
 					employeeDto.getStatus()

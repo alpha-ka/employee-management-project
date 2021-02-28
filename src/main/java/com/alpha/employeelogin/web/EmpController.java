@@ -80,8 +80,10 @@ public class EmpController {
 	@GetMapping("/{empid}")
 	public String updateForm(@PathVariable Long empid, Model model) {
 		baseUrl=ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-		
+		System.out.println(baseUrl);
+		System.out.println();
 		System.out.println(empid);
+		
 		Employee employee = empRepo.findById(empid).orElseThrow(() -> new ResourceNotFoundException("Employee no found"));
 	 
 		model.addAttribute("employee", employee);
@@ -179,6 +181,11 @@ public class EmpController {
 
 	@GetMapping("/adminAccessRequest/{empid}")
 	public String adminAccessRequest(@PathVariable Long empid) {
+		
+		
+		baseUrl=ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+		System.out.println(baseUrl);
+		System.out.println();
 		System.out.println(empid);
 		
 		System.out.println("Alpha");
@@ -303,18 +310,12 @@ public class EmpController {
 		oof.setEmpid(empid);
 		oof.setCreatedby(employee.getFirstname() + " " + employee.getLastname());
 		oof.setStatus("Submitted");
+ 
 
-		String startDate = oof.getStartdate();
-		String endDate = oof.getEnddate();
+		Date startdate = oof.getStartdate();
+		Date enddate= oof.getEnddate();
 
-		System.out.println(startDate + " " + endDate);
-
-		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
-		Date startdateformatted = dateformat.parse(startDate);
-		Date enddateformatted = dateformat.parse(endDate);
-
-		long duration = enddateformatted.getTime() - startdateformatted.getTime();
+		long duration = enddate.getTime() - startdate.getTime();
 
 		int noofdays = (int) TimeUnit.MILLISECONDS.toDays(duration);
 
@@ -368,8 +369,13 @@ public class EmpController {
 	@GetMapping("/oof/employeesList/{empid}")
 	public String requestsList(@PathVariable Long empid, Model model) {
 		Employee employee= empRepo.findById(empid).orElseThrow(() -> new ResourceNotFoundException("Employee no found"));
+		
+		baseUrl=ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+		System.out.println(baseUrl);
 		model.addAttribute("name", employee.getFirstname() + " " + employee.getLastname());
 		model.addAttribute("empid", employee.getEmpid());
+		model.addAttribute("url", baseUrl);
+		
 		List<OutofOffice> oofLists = oofRepo.findAllforAdmin(employee.getEmpid());
 
 		model.addAttribute("oofLists", oofLists);

@@ -1,5 +1,7 @@
 package com.alpha.employeelogin.web;
 
+import java.text.ParseException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,7 +42,7 @@ public class EmployeeRegistrationController {
 	}
 	
 	@PostMapping
-	public String registrationAccount(@ModelAttribute("employee") EmployeeDTO employeeDTO)
+	public String registrationAccount(@ModelAttribute("employee") EmployeeDTO employeeDTO) throws ParseException
 	
 	{		
 		return employeeService.save(employeeDTO);
