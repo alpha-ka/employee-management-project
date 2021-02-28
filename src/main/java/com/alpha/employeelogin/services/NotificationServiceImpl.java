@@ -64,7 +64,9 @@ public class NotificationServiceImpl implements EmailService {
 		mailhelper.setTo(to);
 		mailhelper.setSubject(subject);
 		mailhelper.setText(htmlbody, true);
-		mailhelper.addAttachment("logo.png",new ClassPathResource("logo.png"));
+		mailhelper.addAttachment("logo.jpg",new ClassPathResource("static/images/logo.jpg"));
+		mailhelper.addInline("logo.png", new ClassPathResource("static/images/logo.png"), "image/png");
+		// String inlineImage = "<img src=\"cid:logo.png\"></img><br/>";
 		// mailhelper.addAttachment("alpha-logo.png",new
 		// ClassPathResource("alpha-logo.png"));
 

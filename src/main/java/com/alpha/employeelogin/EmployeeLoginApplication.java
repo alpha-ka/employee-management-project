@@ -10,8 +10,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.alpha.employeelogin.dao.EmployeeRepository;
 import com.alpha.employeelogin.dao.OOFRepository;
@@ -19,20 +21,25 @@ import com.alpha.employeelogin.model.Employee;
 
 
 @SpringBootApplication
-public class EmployeeLoginApplication implements CommandLineRunner
+public class EmployeeLoginApplication implements CommandLineRunner,WebMvcConfigurer
 {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EmployeeLoginApplication.class, args);	
 		
+		
+		
 	}
-	
-//	
-//	@Bean
-//	public PasswordEncoder encoder() {
-//	    return new BCryptPasswordEncoder();
+ 
+//	@Override
+//	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//		
+//		registry
+//			.addResourceHandler("/URLResource/**")
+//			.addResourceLocations("/resources/");
+//		
 //	}
-	
+
 	@Autowired
 	private EmployeeRepository empRepo;
 	
@@ -52,5 +59,10 @@ public class EmployeeLoginApplication implements CommandLineRunner
 		
 		
 	}
+	
+	
+ 
+	
+	
 
 }
