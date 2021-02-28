@@ -9,7 +9,9 @@ import com.alpha.employeelogin.model.OutofOffice;
 
 
 
-public interface OOFRepository extends JpaRepository<com.alpha.employeelogin.model.OutofOffice, Long> {
+
+
+public interface OOFRepository extends JpaRepository<OutofOffice, Long> {
 	
 	
 	@Query("From OutofOffice where empid=?1")

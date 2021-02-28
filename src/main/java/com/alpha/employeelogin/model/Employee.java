@@ -31,8 +31,9 @@ public class Employee {
 
 	
 	@Id
-	@SequenceGenerator(name="emp_seq" , initialValue = 1000  )
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "emp_seq")
+	//@SequenceGenerator(name="emp_seq" , initialValue = 1000  )
+	//@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "emp_seq")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="emp_id")
 	private long empid;
 	
@@ -69,7 +70,8 @@ public class Employee {
 			)
 	private Collection<EmployeeRole> role;
 	
-	@Column(name="created_date", nullable = false, insertable=false,updatable = false, columnDefinition="DATETIME DEFAULT GETDATE() ")	
+	//@Column(name="created_date", nullable = false, insertable=false,updatable = false, columnDefinition="DATETIME DEFAULT GETDATE() ")
+	@Column(name="created_date", nullable = false, insertable=false,updatable = false, columnDefinition="DATETIME DEFAULT CURRENT_TIMESTAMP  ")
 	private Date createddate;
 	
 	@Column(name="updated_date",  insertable=false, columnDefinition="DATETIME")	

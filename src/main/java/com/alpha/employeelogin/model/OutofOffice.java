@@ -12,10 +12,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="out_of_office")
+
 public class OutofOffice {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(insertable = false)
 	private long id;
 	
 	@Column(name="emp_id",nullable = false)
@@ -31,7 +33,7 @@ public class OutofOffice {
 	@Column(name="no_of_days",nullable = false)
 	private int days;
 	
-	@Column(nullable = false,columnDefinition = "VARCHAR(MAX)")
+	@Column(nullable = false,columnDefinition = "VARCHAR(1000)")
 	private String reason;
 	
 	@Column(  nullable = false)
@@ -40,7 +42,8 @@ public class OutofOffice {
 	@Column(  nullable = false)
 	private String status;
 	
-	@Column(name="created_date",nullable = false,insertable=false,updatable = false,columnDefinition = "datetime Default GETDATE()")
+	//@Column(name="created_date",nullable = false,insertable=false,updatable = false,columnDefinition = "datetime Default GETDATE()")
+	@Column(name="created_date",nullable = false,insertable=false,updatable = false,columnDefinition = "datetime Default NOW()")
 	private Date createddate;
 	
 	@Column(name="created_by",nullable = false,updatable = false)
