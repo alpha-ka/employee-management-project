@@ -3,7 +3,7 @@
  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="ISO-8859-1">
-<title>Dashboard</title>
+<title>Out of Office - Requests List</title>
 
 <link rel="stylesheet"
  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -34,7 +34,7 @@
  <br>
 	<div class="container text-center">
 		<div class="form-group">
-			<h1>Out of Office - Requests Lists</h1>
+			<h1>Out of Office - Requests List</h1>
 		</div>
  		 
       <table class="table table-bordered table-striped">
@@ -51,9 +51,8 @@
  		<tbody>
  		<tr th:each="oof : ${oofList}"> 			 
 			  <td th:text="${oof.category}">Category</td>
-			  <!-- <td th:text="${#dates.format(oof.startdate, 'dd-MMM-yyyy')}">Start Date</td> -->
-			  <td th:text="${oof.startdate}">Start Date</td>
-			  <td th:text="${oof.enddate}">End Date</td>
+			  <td th:text="${#dates.format(oof.startdate, 'dd-MMM-yyyy')}">Start Date</td>
+			  <td th:text="${#dates.format(oof.enddate, 'dd-MMM-yyyy')}">End Date</td>
 			  <td th:text="${oof.days}">No of Days</td>
 			  <td th:text="${oof.reason}">Reason</td>
 			  <td th:text="${oof.status}">Status</td>

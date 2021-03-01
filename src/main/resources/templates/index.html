@@ -76,8 +76,7 @@
  <table class="table table-bordered table-striped">
  		 <thead>
  		 <tr>
-			  <td>First Name</td>
-			  <td>Last Name</td>
+			  <td>Name</td>
 			  <td>E-mail</td>
 			  <td>Date of Birth</td>
 			  <td>Department</td>
@@ -92,15 +91,14 @@
  		</thead>
  		<tbody>
  		<tr th:each="e : ${employee}"> 			 
-			  <td th:text="${e.firstname}">First Name</td>
-			  <td th:text="${e.lastname}">Last Name</td>
+			  <td th:text="${e.firstname}+' '+${e.lastname}">Name</td>
 			  <td th:text="${e.email}">E-mail</td>
-			  <td th:text="${{e.dob}}">Date of Birth</td>
+			  <td th:text="${#dates.format(e.dob, 'dd-MMM-yyyy')}">Date of Birth</td>
 			  <td th:text="${e.department}">Department</td>
 			  <td th:text="${e.designation}">Designation</td>
 			  <td th:text="${e.status}">Status</td>			  
-			  <td th:text="${e.createddate}">Created Date</td>
-			  <td th:text="${e.updateddate}">Updated Date</td>
+			  <td th:text="${#dates.format(e.createddate, 'dd-MMM-yyyy HH:mm')}">Created Date</td>
+			  <td th:text="${#dates.format(e.updateddate, 'dd-MMM-yyyy HH:mm')}">Updated Date</td>
 			  <td><a href="#"  class="btn btn-info" role="button" th:onclick="window.open('/[[${e.empid}]]','popUpWindow','height=500,width=1000,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes');">Edit</a></td>
  		
  

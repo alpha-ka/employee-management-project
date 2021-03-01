@@ -40,7 +40,7 @@
 				      </tr>
 				      <tr>
 				        <td>Leave Period </td>
-				        <td th:text="': '+${leaveperiod}"></td> 
+				        <td th:text="': '+${#dates.format(startdate, 'dd-MMM-yyyy')}+' to '+${#dates.format(enddate, 'dd-MMM-yyyy')}"></td> 
 				      </tr>
 				      <tr>
 				        <td>Reason </td>

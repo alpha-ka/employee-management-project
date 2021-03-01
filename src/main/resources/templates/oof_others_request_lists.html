@@ -3,7 +3,7 @@
  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="ISO-8859-1">
-<title>Out of Office - Requests Lists</title>
+<title>Out of Office - Requests List</title>
 
 <link rel="stylesheet"
  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -49,6 +49,7 @@
       <table class="table table-bordered table-striped">
  		 <thead>
  		 <tr>
+ 		 	  <td>Name</td>
 			  <td>Category</td>
 			  <td>Start Date</td>
 			  <td>End Date</td>
@@ -59,21 +60,21 @@
  		</tr>
  		</thead>
  		<tbody>
- 		<tr th:each="oof : ${oofLists}"> 			 
+ 		<tr th:each="oof : ${oofLists}"> 	
+ 			  <td th:text="${oof.name}">Name</td>		 
 			  <td th:text="${oof.category}">Category</td>
-			  <!-- <td th:text="${#dates.format(oof.startdate, 'dd-MMM-yyyy')}">Start Date</td> -->
-			  <td th:text="${oof.startdate}">Start Date</td>
-			  <td th:text="${oof.enddate}">End Date</td>
+			  <td th:text="${#dates.format(oof.startdate, 'dd-MMM-yyyy')}">Start Date</td>
+			  <td th:text="${#dates.format(oof.enddate, 'dd-MMM-yyyy')}">End Date</td>
 			  <td th:text="${oof.days}">No of Days</td>
 			  <td th:text="${oof.reason}">Reason</td>
 			  <td th:text="${oof.status}">Status</td>
 			  <td> 
 		<div class="row">	
 		  <div th:style="${oof.status == 'Submitted' ? 'display:block' : 'display:none'}"> 
-       <a th:href="@{'/oof/update/?empid='+${empid}+'&oofid='+${oof.id}+'&flag=Yes'}">
+       <a th:href="@{'/oof/update/?empid='+${empid}+'&oofid='+${oof.oofid}+'&flag=Yes'}">
          <button type="button" class="btn btn-success"  >Approve</button>
           </a> 
-         <a th:href="@{'/oof/update/?empid='+${empid}+'&oofid='+${oof.id}+'&flag=No'}">
+         <a th:href="@{'/oof/update/?empid='+${empid}+'&oofid='+${oof.oofid}+'&flag=No'}">
          <button type="button" class="btn btn-danger"  >Reject</button>
          </a>
          </div> 
